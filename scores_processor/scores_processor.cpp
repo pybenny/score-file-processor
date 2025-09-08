@@ -42,15 +42,17 @@ Constraints
 void total_scores();
 
 
-int main(int argc, char* argv[]) // argument count (argc), argument vector (argv) 
+int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
 {
     string line;
+    ifstream in_file;
+    ofstream out_file;
+    if (argc < 3) {
+        cerr << "Usage: " << argv[0] << " <input.txt> <output.txt>\n";
+        return 1;
+    }
 
-    string ifile = "input.txt";
-    ifstream in_file(ifile);
 
-    string ofile = "output.txt";
-    ofstream out_file(ofile);
 
     // checking for fail to open
     if (!in_file) {
@@ -58,8 +60,6 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         return 1;
     }
     else {
-        cout << "File successfully opened\n";
-        cout << "Scores:\n";
         while (getline(in_file, line)) {
             cout << line << endl; // temp: outputting scores 
         }
@@ -76,17 +76,23 @@ void total_scores(){
     int size = 0; // tracking array size
     int* sArray = new int; // dynamic array initialization
 
-    for
+    for (int i = 0; i < size; ++i) {
+        
+    }
 }
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
-//void highest_and_lowest(){}
+//void highest_score(){}
+
+//void lowest_score(){}
 
 //Compute the average score in input.txt
 //void compute_average(){}
 
 //Count how many scores are above average and how many are below average || maybe need 2 seperate functions for this
-//void above_below_average(){}
+//void above_average(){}
+
+//void below_average(){}
 
 
 
