@@ -44,6 +44,8 @@ Constraints
 
 int main()
 {
+    string line;
+
     string file = "input.txt";
     ifstream in_file(file);
 
@@ -54,6 +56,10 @@ int main()
     }
     else {
         cout << "File successfully opened\n";
+        cout << "Scores:\n";
+        while (getline(in_file, line)) {
+            cout << line << endl;
+        }
     }
 
 
@@ -63,7 +69,10 @@ int main()
 // Processing (Pointer-based) Below:
 
 //Count the total number of scores in input.txt
-//void total_scores(){}
+void total_scores(){
+    int size = 0; // tracking array size
+    int* sArray = new int[1]; // dynamic array initialization
+}
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
 //void highest_and_lowest(){}
