@@ -49,13 +49,15 @@ int main()
 
     // checking for fail to open
     if (!in_file) {
-
+        cout << "ERROR: Input file has failed to open\n";
+        return 1;
     }
     else {
-
+        cout << "File successfully opened\n";
     }
 
 
+    return 0;
 }
 
 // Processing (Pointer-based) Below:
