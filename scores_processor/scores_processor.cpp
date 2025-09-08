@@ -39,15 +39,18 @@ Constraints
         o Example: If input.txt does not exist, print an error and exit.
 */
 
-//void total_scores();
+void total_scores();
 
 
-int main()
+int main(int argc, char* argv[]) // argument count (argc), argument vector (argv) 
 {
     string line;
 
-    string file = "input.txt";
-    ifstream in_file(file);
+    string ifile = "input.txt";
+    ifstream in_file(ifile);
+
+    string ofile = "output.txt";
+    ofstream out_file(ofile);
 
     // checking for fail to open
     if (!in_file) {
@@ -58,11 +61,11 @@ int main()
         cout << "File successfully opened\n";
         cout << "Scores:\n";
         while (getline(in_file, line)) {
-            cout << line << endl;
+            cout << line << endl; // temp: outputting scores 
         }
     }
 
-
+    in_file.close();
     return 0;
 }
 
@@ -71,7 +74,9 @@ int main()
 //Count the total number of scores in input.txt
 void total_scores(){
     int size = 0; // tracking array size
-    int* sArray = new int[1]; // dynamic array initialization
+    int* sArray = new int; // dynamic array initialization
+
+    for
 }
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
