@@ -40,6 +40,7 @@ Constraints
 */
 
 //void total_scores();
+void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
@@ -64,20 +65,20 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     // checking for fail to open
     if (!in_file) {
         cout << "ERROR: Input file has failed to open\n";
+        delete[] sArray;
         return 1;
     }
     else {
-        while (getline(in_file, line)) {
-            cout << line << endl; // temporary line: outputting scores inside of input.txt as a test
-            // call on load_scores(); first
-            // call all other functions, total, min, max
-            // call on compute average
-            // call on count_above and count_below USING compute_average function within those two functions
-            // write all of the lines to out_file
-        }
+        // after loading scores, the array and it's elements will be filled and ready for multi function use
+        load_scores(in_file, sArray, size, capacity); // call on load_scores(); first
+        // call all other functions, total, min, max, by using the values stored in the array
+        // call on compute average
+        // call on count_above and count_below USING compute_average function within both of those two functions
+        // write all of the lines to out_file
     }
 
     in_file.close();
+    out_file.close();
     delete [] sArray;
     return 0;
 }
@@ -93,7 +94,7 @@ void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
     }
     ++size;
 }
-
+// currently only grows, needs to append a value, this function scales the array making room for all scores inside input.exe
 void resizable_mechanism(int*& sArray, int& size, int& capacity) {
     int newCapacity = (capacity * 2); 
     int* newArray = new int[newCapacity];
