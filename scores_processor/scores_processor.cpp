@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     }
     else {
         while (getline(in_file, line)) {
-            cout << line << endl; // temp: outputting scores 
+            cout << line << endl; // temporary: outputting scores in input.txt
             /*
             RUN FUNCTIONS HERE
             */
@@ -80,20 +80,19 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     return 0;
 }
 
-// Processing (Pointer-based) Below:
+
+void resizable_mechanism(int*& sArray, int& size, int& capacity) {
+
+}
 
 //Count the total number of scores in input.txt
-/*void total_scores(const int* sArray, int size) {
+/*void total_scores() {
     int size = size;
-
-    if 
-
 
     for (int i = 0; i < size; ++i) {
         
     }
-}
-*/
+} */
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
 //void highest_score(){}
