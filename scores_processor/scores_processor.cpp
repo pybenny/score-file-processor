@@ -39,11 +39,15 @@ Constraints
         o Example: If input.txt does not exist, print an error and exit.
 */
 
-void total_scores();
+//void total_scores();
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
 {
+    int size = 0; // tracking array size
+    int capacity = 5; // starting with a 5 element capacity, that will grow
+    int* sArray = new int[capacity]; // dynamic array initialization
+
     string line;
     ifstream in_file;
     ofstream out_file;
@@ -52,6 +56,12 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         return 1;
     }
 
+    const string ifile = argv[1];
+    const string ofile = argv[2];
+    ifstream in_file(argv[1]); // open input stream command line
+    ofstream out_file(argv[2]); // open output stream command line
+
+    
 
 
     // checking for fail to open
@@ -62,6 +72,9 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     else {
         while (getline(in_file, line)) {
             cout << line << endl; // temp: outputting scores 
+            /*
+            RUN FUNCTIONS HERE
+            */
         }
     }
 
@@ -72,9 +85,11 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
 // Processing (Pointer-based) Below:
 
 //Count the total number of scores in input.txt
-void total_scores(){
-    int size = 0; // tracking array size
-    int* sArray = new int; // dynamic array initialization
+/*void total_scores(const int* sArray, int size) {
+    int size = size;
+
+    if 
+
 
     for (int i = 0; i < size; ++i) {
         
