@@ -49,15 +49,12 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     int* sArray = new int[capacity]; // dynamic array initialization
 
     string line;
-    ifstream in_file;
-    ofstream out_file;
+
     if (argc < 3) {
         cerr << "Usage: " << argv[0] << " <input.txt> <output.txt>\n";
         return 1;
     }
 
-    const string ifile = argv[1];
-    const string ofile = argv[2];
     ifstream in_file(argv[1]); // open input stream command line
     ofstream out_file(argv[2]); // open output stream command line
 
@@ -79,6 +76,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     }
 
     in_file.close();
+    delete [] sArray;
     return 0;
 }
 
@@ -95,6 +93,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         
     }
 }
+*/
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
 //void highest_score(){}
