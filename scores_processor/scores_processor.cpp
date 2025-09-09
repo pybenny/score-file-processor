@@ -68,10 +68,12 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     }
     else {
         while (getline(in_file, line)) {
-            cout << line << endl; // temporary: outputting scores in input.txt
-            /*
-            RUN FUNCTIONS HERE
-            */
+            cout << line << endl; // temporary line: outputting scores inside of input.txt as a test
+            // call on load_scores(); first
+            // call all other functions, total, min, max
+            // call on compute average
+            // call on count_above and count_below USING compute_average function within those two functions
+            // write all of the lines to out_file
         }
     }
 
@@ -80,9 +82,36 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     return 0;
 }
 
+// only function that will resize, using resizable_mechanism
+// Loads all scores, if the size of the array is the same as capacity it will execute the resizable_mechanism function
+void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
+    // might need the file input ifstream code somewhere here?
+    // read numbers(tokens) not text lines
+
+    if (size == capacity) {
+        resizable_mechanism(sArray, size, capacity);
+    }
+    ++size;
+}
 
 void resizable_mechanism(int*& sArray, int& size, int& capacity) {
+    int newCapacity = (capacity * 2); 
+    int* newArray = new int[newCapacity];
 
+    // copy existing elements
+    int* source = sArray;
+    int* destination = newArray;
+    int* end = sArray + size;
+    while (source != end) {
+        *destination++ = *source++;
+    }
+
+    // then delete the old array
+    delete[] sArray; 
+
+    sArray = newArray;
+    capacity = newCapacity;
+    //*(arrSize + );
 }
 
 //Count the total number of scores in input.txt
