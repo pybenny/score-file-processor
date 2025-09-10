@@ -41,6 +41,7 @@ Constraints
 
 //void total_scores();
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
+void resizable_mechanism(int*& sArray, int& size, int& capacity)
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
@@ -75,6 +76,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on compute average
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
+        cout << sArray;
     }
 
     in_file.close(); // close input file
