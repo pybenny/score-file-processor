@@ -39,9 +39,10 @@ Constraints
         o Example: If input.txt does not exist, print an error and exit.
 */
 
+void resizable_mechanism(int*& sArray, int& size, int& capacity);
 //void total_scores();
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
-void resizable_mechanism(int*& sArray, int& size, int& capacity)
+
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
@@ -76,7 +77,8 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on compute average
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
-        cout << sArray;
+        
+        out_file << load_scores << endl;
     }
 
     in_file.close(); // close input file
@@ -92,14 +94,18 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
     // TEMPORARY: might need the file input ifstream code somewhere here? maybe not
     // read the scores as numbers(tokens), not text lines.
+    int v;
+    
+    while (in_file >> v) {
+        // TEMP: NEED to implement appending here...
+        if (size == capacity) {
+            resizable_mechanism(sArray, size, capacity);
+            // double and pointer copy here
+            // append: write at logical end, address arr + size | pointer arithmetic
 
-    // TEMP: NEED to implement appending here...
-    if (size == capacity) {
-        resizable_mechanism(sArray, size, capacity);
-        // double and pointer copy here
-        // append: write at logical end, address arr + size | pointer arithmetic
+        }
+        ++size; // ++size;
     }
-    ++size; // ++size;
 }
 // currently only grows, needs to append a value, this function scales the array making room for all scores inside input.exe
 void resizable_mechanism(int*& sArray, int& size, int& capacity) {
