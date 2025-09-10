@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
         
-        out_file << load_scores << endl;
+        // out_file <<
     }
 
     in_file.close(); // close input file
@@ -94,16 +94,16 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
     // TEMPORARY: might need the file input ifstream code somewhere here? maybe not
     // read the scores as numbers(tokens), not text lines.
-    int v;
+    int v; // loop value
     
     while (in_file >> v) {
         // TEMP: NEED to implement appending here...
         if (size == capacity) {
             resizable_mechanism(sArray, size, capacity);
             // double and pointer copy here
-            // append: write at logical end, address arr + size | pointer arithmetic
-
         }
+        // append: write at logical end, address arr + size | pointer arithmetic
+        *(sArray + size) = v; // updates sArray and size to the value of v each loop
         ++size; // ++size;
     }
 }
@@ -138,14 +138,14 @@ void resizable_mechanism(int*& sArray, int& size, int& capacity) {
 } */
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
-//void highest_score(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+//int highest_score(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
 
-//void lowest_score(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+//int lowest_score(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
 
 //Compute the average score in input.txt
-//void compute_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+//double compute_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
 
 //Count how many scores are above average and how many are below average || maybe need 2 seperate functions for this
-//void above_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+//int above_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
 
-//void below_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+//int below_average(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
