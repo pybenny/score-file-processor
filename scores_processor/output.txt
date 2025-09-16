@@ -1,4 +1,4 @@
 Number of scores: 10
 Highest score: 93
 Lowest score: 72
-The average score is: 83
+The average score is: 83.70

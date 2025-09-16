@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         out_file << "Number of scores: " << total_scores(size) << endl;
         out_file << "Highest score: " << highest_score(sArray, size) << endl;
         out_file << "Lowest score: " << lowest_score(sArray, size) << endl;
-        out_file << "The average score is: " << compute_average(sArray, size) << endl;
+        out_file << "The average score is: " << fixed << setprecision(2) << compute_average(sArray, size) << endl;
         
         // out_file <<
     }
@@ -165,7 +165,7 @@ int lowest_score(const int* sArray, int size) {
 
 //Computes the average score in the array holding scores
 double compute_average(const int* sArray, int size) {
-    int sum = 0;
+    double sum = 0; // had set to double instead of int to prevent truncation
     double average;
     for (int i = 0; i < size; i++) {
         sum += *(sArray + i); // dereference and add each element value to sum
