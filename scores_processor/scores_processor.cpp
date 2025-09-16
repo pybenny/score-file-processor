@@ -4,42 +4,6 @@
 #include <iomanip>
 using namespace std;
 
-/*
-Program Requirements
-1. Command-Line Arguments
-    o The program must accept two file names as command-line arguments:
-        ./scores_processor input.txt output.txt
-    o input.txt: Contains student scores (one per line).
-    o output.txt: The program should write the processed results here.
-2. File Input (Streams)
-    o Read all scores from input.txt.
-    o Use dynamic memory allocation (pointers) to store the scores in an array
-    (you do not know the number of scores beforehand).
-        o Tip: Use the array resizable mechanism you implemented in Programming Assignment 01.
-    o Stop reading when EOF (End Of File) is reached.
-3. Processing (Pointer-based)
-Implement the following:
-    o Count the total number of scores.
-    o Find the highest and lowest score.
-    o Compute the average score.
-    o Count how many scores are above average and how many are below average.
-4. File Output (Streams)
-    o Example output.txt:
-    Number of scores: 20
-    Highest: 98
-    Lowest: 45
-    Average: 72.3
-    Above average: 9
-    Below average: 11
-5. Memory Management
-    o Free all dynamically allocated memory before exiting.
-Constraints
-    • All array operations must use pointers/pointer arithmetic (no [] indexing).
-    • You must use command-line arguments for file names (no hardcoding).
-    • Handle errors:
-        o Example: If input.txt does not exist, print an error and exit.
-*/
-
 // defining functions at the top for main
 void resizable_mechanism(int*& sArray, int& size, int& capacity);
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
@@ -50,13 +14,11 @@ double compute_average(const int* sArray, int size);
 int above_average(const int* sArray, int size, double average);
 int below_average(const int* sArray, int size, double average);
 
-
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
 {
     int size = 0; // tracking array size
     int capacity = 5; // starting with a 5 element capacity, that will grow
     int* sArray = new int[capacity]; // dynamic array initialization
-
     string line;
 
     if (argc < 3) {
@@ -67,9 +29,6 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     ifstream in_file(argv[1]); // open input stream command line
     ofstream out_file(argv[2]); // open output stream command line
 
-    
-
-
     // checking for fail to open
     if (!in_file) {
         cout << "ERROR: Input file has failed to open\n";
@@ -79,13 +38,23 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     else {
         // after loading scores, the array and it's elements will get filled and ready for multi function use
         load_scores(in_file, sArray, size, capacity); // call on load_scores(); first
-        double average = compute_average(sArray, size); // defining average at the top for above_average(), below_average() use.
-        out_file << "Number of scores: " << total_scores(size) << endl;
-        out_file << "Highest: " << highest_score(sArray, size) << endl;
-        out_file << "Lowest: " << lowest_score(sArray, size) << endl;
-        out_file << "Average: " << fixed << setprecision(2) << compute_average(sArray, size) << endl;
-        out_file << "Above average: " << above_average(sArray, size, average) << endl;
-        out_file << "Below average: " << below_average(sArray, size, average) << endl;
+
+        if (size == 0) { // checks if size == 0, exists program and outputs "no scores"
+            out_file << "Number of scores: 0" << endl;
+            in_file.close();
+            out_file.close();
+            delete[] sArray;
+            return 0;
+        }
+        else {
+            double average = compute_average(sArray, size); // defining average at the top for above_average(), below_average() use.
+            out_file << "Number of scores: " << total_scores(size) << endl;
+            out_file << "Highest: " << highest_score(sArray, size) << endl;
+            out_file << "Lowest: " << lowest_score(sArray, size) << endl;
+            out_file << "Average: " << fixed << setprecision(2) << average << endl; // average defined above
+            out_file << "Above average: " << above_average(sArray, size, average) << endl;
+            out_file << "Below average: " << below_average(sArray, size, average) << endl;
+        }
     }
 
     in_file.close(); // close input file
@@ -98,15 +67,12 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
 // Only function that reads the file input.txt || Only function that will resize, using resizable_mechanism
 // Loads all scores, if the size of the array is the same as capacity it will execute the resizable_mechanism function
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
-    // TEMPORARY: might need the file input ifstream code somewhere here? maybe not
     // read the scores as numbers(tokens), not text lines.
     int v; // loop value
     
     while (in_file >> v) {
-        // TEMP: may NEED to implement appending here...
         if (size == capacity) {
             resizable_mechanism(sArray, size, capacity);
-            // double and pointer copy here
         }
         // append: write at logical end, address arr + size | pointer arithmetic
         *(sArray + size) = v;
