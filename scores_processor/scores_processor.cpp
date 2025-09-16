@@ -40,8 +40,9 @@ Constraints
 */
 
 void resizable_mechanism(int*& sArray, int& size, int& capacity);
-//void total_scores();
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
+void total_scores(int size);
+
 
 
 
@@ -77,6 +78,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on compute average
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
+        total_scores();
         
         // out_file <<
     }
@@ -129,13 +131,10 @@ void resizable_mechanism(int*& sArray, int& size, int& capacity) {
 }
 
 // iterates through the array that was filled by load_scores() func, and gives the total int size; amount of values in that array
-/*void total_scores() { // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
+void total_scores(int size) { // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
     int size = size;
-
-    for (int i = 0; i < size; ++i) {
-        
-    }
-} */
+    
+}
 
 //Find the highest and lowest scores in input.txt || maybe need 2 seperate functions for this
 //int highest_score(){} // never resize, never read the file | only read the array | does not call load_scores, only the array that's filled
