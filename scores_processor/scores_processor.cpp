@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
         out_file << "Number of scores: " << total_scores(size) << endl;
-        out_file << "Highest score: " << highest_score << endl;
+        out_file << "Highest score: " << highest_score(sArray, size) << endl;
         
         // out_file <<
     }
@@ -138,18 +138,13 @@ int total_scores(int size) {
 }
 
 //Find the highest and lowest scores in input.txt
-int highest_score(int* sArray, int size) {
-    int highestNum = 0;
-    *sArray = array;
-
-    for (int i = 0; i < array; i++) {
-        if (array > highestNum) {
-            highestNum = i;
+int highest_score(const int* sArray, int size) {
+    int highestNum = *sArray; // starting from first element
+    for (int i = 0; i < size; i++) {
+        if (*(sArray + i) > highestNum) {
+            highestNum = *(sArray + i);
         }
-        i++;
     }
-
-
     return highestNum;
 }
 

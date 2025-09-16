@@ -1,1 +1,2 @@
 Number of scores: 10
+Highest score: 93
