@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         out_file << "Number of scores: " << total_scores(size) << endl;
         out_file << "Highest score: " << highest_score(sArray, size) << endl;
         out_file << "Lowest score: " << lowest_score(sArray, size) << endl;
-        out_file << "The average score is: " << setprecision(2) << compute_average(sArray, size) << endl;
+        out_file << "The average score is: " << compute_average(sArray, size) << endl;
         
         // out_file <<
     }
@@ -156,7 +156,7 @@ int highest_score(const int* sArray, int size) {
 int lowest_score(const int* sArray, int size) {
     int lowestNum = *sArray; // starting from first element
     for (int i = 0; i < size; i++) {
-        if (*(sArray + i) < lowestNum) { // derefrencing and reading each value to compare/check if it's less
+        if (*(sArray + i) < lowestNum) { // dereferencing and reading each value to compare/check if it's less
             lowestNum = *(sArray + i); // storing the absolute lowest value in the array in highestNum
         }
     }
@@ -166,10 +166,12 @@ int lowest_score(const int* sArray, int size) {
 //Computes the average score in the array holding scores
 double compute_average(const int* sArray, int size) {
     int sum = 0;
+    double average;
     for (int i = 0; i < size; i++) {
-        sum += *sArray;
+        sum += *(sArray + i); // dereference and add each element value to sum
     }
-    int average = sum / 2;
+    average = sum / size; // divide sum by the size of the array
+    return average; // return the computed average
 }
 
 //Count how many scores are above average and how many are below average || maybe need 2 seperate functions for this
