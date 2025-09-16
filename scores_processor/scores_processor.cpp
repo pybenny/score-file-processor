@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 /*
@@ -43,7 +44,8 @@ void resizable_mechanism(int*& sArray, int& size, int& capacity);
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
 int total_scores(int size);
 int highest_score(const int* sArray, int size);
-
+int lowest_score(const int* sArray, int size);
+double compute_average(const int* sArray, int size);
 
 
 
@@ -81,6 +83,8 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // write all of the lines to out_file after calling on functions above
         out_file << "Number of scores: " << total_scores(size) << endl;
         out_file << "Highest score: " << highest_score(sArray, size) << endl;
+        out_file << "Lowest score: " << lowest_score(sArray, size) << endl;
+        out_file << "The average score is: " << setprecision(2) << compute_average(sArray, size) << endl;
         
         // out_file <<
     }
@@ -132,28 +136,43 @@ void resizable_mechanism(int*& sArray, int& size, int& capacity) {
     //*(arrSize + );
 }
 
-// All functions below never resize, never read the file | only read the array/size | does not call load_scores, only the array that's filled
+// All functions below never resize | only read the array/size | does not call load_scores(), only the array that's filled
 int total_scores(int size) { 
     return size;
 }
 
-//Find the highest and lowest scores in input.txt
+// Finds the highest score within the array holding input.txt scores
 int highest_score(const int* sArray, int size) {
     int highestNum = *sArray; // starting from first element
     for (int i = 0; i < size; i++) {
-        if (*(sArray + i) > highestNum) {
-            highestNum = *(sArray + i);
+        if (*(sArray + i) > highestNum) { // derefrencing and reading each value to compare/check if it's greater
+            highestNum = *(sArray + i); // storing the absolute highest value in the array
         }
     }
-    return highestNum;
+    return highestNum; // return the highest number
 }
 
-//int lowest_score(){} 
+// Finds the lowest scorew ithin the array holding input.txt scores | similar syntax to highest_score() func
+int lowest_score(const int* sArray, int size) {
+    int lowestNum = *sArray; // starting from first element
+    for (int i = 0; i < size; i++) {
+        if (*(sArray + i) < lowestNum) { // derefrencing and reading each value to compare/check if it's less
+            lowestNum = *(sArray + i); // storing the absolute lowest value in the array in highestNum
+        }
+    }
+    return lowestNum; // return the highest number
+} 
 
-//Compute the average score in input.txt
-//double compute_average(){} 
+//Computes the average score in the array holding scores
+double compute_average(const int* sArray, int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += *sArray;
+    }
+    int average = sum / 2;
+}
 
 //Count how many scores are above average and how many are below average || maybe need 2 seperate functions for this
-//int above_average(){} 
+//int above_average(const int* sArray, int size){} 
 
-//int below_average(){} 
+//int below_average(const int* sArray, int size){} 
