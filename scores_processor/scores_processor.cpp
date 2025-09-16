@@ -42,6 +42,7 @@ Constraints
 void resizable_mechanism(int*& sArray, int& size, int& capacity);
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
 int total_scores(int size);
+int highest_score(const int* sArray, int size);
 
 
 
@@ -79,7 +80,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         // call on count_above and count_below USING compute_average function within both of those two functions
         // write all of the lines to out_file after calling on functions above
         out_file << "Number of scores: " << total_scores(size) << endl;
-        out_file << "Highest score: " <<  << endl;
+        out_file << "Highest score: " << highest_score << endl;
         
         // out_file <<
     }
@@ -137,8 +138,19 @@ int total_scores(int size) {
 }
 
 //Find the highest and lowest scores in input.txt
-void highest_score(const int* sArray, int size) {
+int highest_score(int* sArray, int size) {
+    int highestNum = 0;
+    *sArray = array;
 
+    for (int i = 0; i < array; i++) {
+        if (array > highestNum) {
+            highestNum = i;
+        }
+        i++;
+    }
+
+
+    return highestNum;
 }
 
 //int lowest_score(){} 
