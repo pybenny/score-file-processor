@@ -40,13 +40,14 @@ Constraints
         o Example: If input.txt does not exist, print an error and exit.
 */
 
+// defining functions at the top for main
 void resizable_mechanism(int*& sArray, int& size, int& capacity);
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity);
 int total_scores(int size);
 int highest_score(const int* sArray, int size);
 int lowest_score(const int* sArray, int size);
 double compute_average(const int* sArray, int size);
-
+int above_average(const int* sArray, int size);
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
@@ -85,8 +86,8 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         out_file << "Highest score: " << highest_score(sArray, size) << endl;
         out_file << "Lowest score: " << lowest_score(sArray, size) << endl;
         out_file << "The average score is: " << fixed << setprecision(2) << compute_average(sArray, size) << endl;
+
         
-        // out_file <<
     }
 
     in_file.close(); // close input file
@@ -96,8 +97,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
 }
 
 // No printing. No stats. No opening/closing files. Returns when EOF reached.
-// only function that reads the file input.txt
-// only function that will resize, using resizable_mechanism
+// Only function that reads the file input.txt || Only function that will resize, using resizable_mechanism
 // Loads all scores, if the size of the array is the same as capacity it will execute the resizable_mechanism function
 void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
     // TEMPORARY: might need the file input ifstream code somewhere here? maybe not
@@ -105,22 +105,22 @@ void load_scores(ifstream& in_file, int*& sArray, int& size, int& capacity) {
     int v; // loop value
     
     while (in_file >> v) {
-        // TEMP: NEED to implement appending here...
+        // TEMP: may NEED to implement appending here...
         if (size == capacity) {
             resizable_mechanism(sArray, size, capacity);
             // double and pointer copy here
         }
         // append: write at logical end, address arr + size | pointer arithmetic
         *(sArray + size) = v;
-        ++size; // ++size;
+        ++size;
     }
 }
 // currently only grows, needs to append a value, this function scales the array making room for all scores inside input.exe
 void resizable_mechanism(int*& sArray, int& size, int& capacity) {
-    int newCapacity = (capacity * 2); 
+    int newCapacity = (capacity * 2); // double capacity for new capacity
     int* newArray = new int[newCapacity];
 
-    // copy existing elements
+    // copying existing elements
     int* source = sArray;
     int* destination = newArray;
     int* end = sArray + size;
@@ -128,7 +128,7 @@ void resizable_mechanism(int*& sArray, int& size, int& capacity) {
         *destination++ = *source++;
     }
 
-    // then delete the old array
+    // delete old array
     delete[] sArray; 
 
     sArray = newArray;
@@ -152,7 +152,7 @@ int highest_score(const int* sArray, int size) {
     return highestNum; // return the highest number
 }
 
-// Finds the lowest scorew ithin the array holding input.txt scores | similar syntax to highest_score() func
+// Finds the lowest score within the array holding input.txt scores | similar syntax to highest_score() func
 int lowest_score(const int* sArray, int size) {
     int lowestNum = *sArray; // starting from first element
     for (int i = 0; i < size; i++) {
@@ -163,7 +163,7 @@ int lowest_score(const int* sArray, int size) {
     return lowestNum; // return the highest number
 } 
 
-//Computes the average score in the array holding scores
+// Computes the average score in the array holding scores
 double compute_average(const int* sArray, int size) {
     double sum = 0; // had set to double instead of int to prevent truncation
     double average;
@@ -174,7 +174,10 @@ double compute_average(const int* sArray, int size) {
     return average; // return the computed average
 }
 
-//Count how many scores are above average and how many are below average || maybe need 2 seperate functions for this
-//int above_average(const int* sArray, int size){} 
+// Counts how many scores are above average
+int above_average(const int* sArray, int size) 
 
-//int below_average(const int* sArray, int size){} 
+} 
+
+// Counts how many scores are below average
+//int below_average(const int* sArray, int size) {} 
