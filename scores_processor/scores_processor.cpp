@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     int size = 0; // tracking array size
     int capacity = 5; // starting with a 5 element capacity, that will grow
     int* sArray = new int[capacity]; // dynamic array initialization
-    string line;
 
     if (argc < 3) {
         cerr << "Usage: " << argv[0] << " <input.txt> <output.txt>\n";
@@ -29,32 +28,39 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
     ifstream in_file(argv[1]); // open input stream command line
     ofstream out_file(argv[2]); // open output stream command line
 
-    // checking for fail to open
+    // checking for fail to open input.txt
     if (!in_file) {
-        cout << "ERROR: Input file has failed to open\n";
+        cout << "ERROR: Input file has failed to open!\n";
         delete[] sArray; // exit case | delete array preventing memory leaks
         return 1;
     }
-    else {
-        // after loading scores, the array and it's elements will get filled and ready for multi function use
-        load_scores(in_file, sArray, size, capacity); // call on load_scores(); first
 
-        if (size == 0) { // checks if size == 0, exists program and outputs "no scores"
-            out_file << "Number of scores: 0" << endl;
-            in_file.close();
-            out_file.close();
-            delete[] sArray;
-            return 0;
-        }
-        else {
-            double average = compute_average(sArray, size); // defining average at the top for above_average(), below_average() use.
-            out_file << "Number of scores: " << total_scores(size) << endl;
-            out_file << "Highest: " << highest_score(sArray, size) << endl;
-            out_file << "Lowest: " << lowest_score(sArray, size) << endl;
-            out_file << "Average: " << fixed << setprecision(2) << average << endl; // average defined above
-            out_file << "Above average: " << above_average(sArray, size, average) << endl;
-            out_file << "Below average: " << below_average(sArray, size, average) << endl;
-        }
+    // checking for fail to open output.txt
+    if (!out_file) {
+        cout << "ERROR: Output file has failed to open!\n";
+        in_file.close();
+        delete[] sArray; // exit case | delete array preventing memory leaks
+        return 1;
+    }
+
+    // after loading scores, the array and it's elements will get filled and ready for multi function use
+    load_scores(in_file, sArray, size, capacity); // call on load_scores(); first
+
+    if (size == 0) { // checks if size == 0, exists program and outputs "no scores"
+        out_file << "Number of scores: 0" << endl;
+        in_file.close();
+        out_file.close();
+        delete[] sArray;
+        return 0;
+    }
+    else {
+        double average = compute_average(sArray, size); // defining average at the top for above_average(), below_average() use.
+        out_file << "Number of scores: " << total_scores(size) << endl;
+        out_file << "Highest: " << highest_score(sArray, size) << endl;
+        out_file << "Lowest: " << lowest_score(sArray, size) << endl;
+        out_file << "Average: " << fixed << setprecision(2) << average << endl; // average defined above
+        out_file << "Above average: " << above_average(sArray, size, average) << endl;
+        out_file << "Below average: " << below_average(sArray, size, average) << endl;
     }
 
     in_file.close(); // close input file
