@@ -2,5 +2,5 @@ Number of scores: 10
 Highest: 93
 Lowest: 72
 Average: 83.70
-Above average: 0
-Below average: 
+Above average: 6
+Below average: 4

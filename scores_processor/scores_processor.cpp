@@ -48,6 +48,7 @@ int highest_score(const int* sArray, int size);
 int lowest_score(const int* sArray, int size);
 double compute_average(const int* sArray, int size);
 int above_average(const int* sArray, int size, double average);
+int below_average(const int* sArray, int size, double average);
 
 
 int main(int argc, char* argv[]) // argument count (argc), argument vector (argv)
@@ -76,19 +77,15 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         return 1;
     }
     else {
-        double average = compute_average(sArray, size); // defining average for above_average(), below_average() use.
-        // after loading scores, the array and it's elements will be filled and ready for multi function use
+        // after loading scores, the array and it's elements will get filled and ready for multi function use
         load_scores(in_file, sArray, size, capacity); // call on load_scores(); first
-        // call all other statistical functions: total, min, max, by using the values stored in the array obtained by load_scores
-        // call on compute average
-        // call on count_above and count_below USING compute_average function within both of those two functions
-        // write all of the lines to out_file after calling on functions above
+        double average = compute_average(sArray, size); // defining average at the top for above_average(), below_average() use.
         out_file << "Number of scores: " << total_scores(size) << endl;
         out_file << "Highest: " << highest_score(sArray, size) << endl;
         out_file << "Lowest: " << lowest_score(sArray, size) << endl;
         out_file << "Average: " << fixed << setprecision(2) << compute_average(sArray, size) << endl;
         out_file << "Above average: " << above_average(sArray, size, average) << endl;
-        out_file << "Below average: " << endl;
+        out_file << "Below average: " << below_average(sArray, size, average) << endl;
     }
 
     in_file.close(); // close input file
@@ -179,10 +176,16 @@ double compute_average(const int* sArray, int size) {
 int above_average(const int* sArray, int size, double average) {
     int aboveCount = 0;
     for (int i = 0; i < size; i++) {
-        aboveCount += (average < *(sArray + i));
+        aboveCount += (*(sArray + i) > average); // cleaner fix than running an if statement instead
     }
-    return aboveCount;
-} 
+    return aboveCount; // returns the amount of scores above average
+}
 
 // Counts how many scores are below average
-//int below_average(const int* sArray, int size, double average) {}
+int below_average(const int* sArray, int size, double average) {
+    int belowCount = 0;
+    for (int i = 0; i < size; i++) {
+        belowCount += (*(sArray + i) < average); // cleaner fix than running an if statement instead
+    }
+    return belowCount; // returns the amount of scores below average
+}
