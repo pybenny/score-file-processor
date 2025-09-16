@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) // argument count (argc), argument vector (argv
         out_file << "Number of scores: " << total_scores(size) << endl;
         out_file << "Highest: " << highest_score(sArray, size) << endl;
         out_file << "Lowest: " << lowest_score(sArray, size) << endl;
-        out_file << "Average: " << fixed << setprecision(2) << average << endl; // average defined above
+        out_file << "Average: " << fixed << setprecision(1) << average << endl; // average defined above
         out_file << "Above average: " << above_average(sArray, size, average) << endl;
         out_file << "Below average: " << below_average(sArray, size, average) << endl;
     }

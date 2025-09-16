@@ -1,6 +1,6 @@
 Number of scores: 10
 Highest: 93
 Lowest: 72
-Average: 83.70
+Average: 83.7
 Above average: 6
 Below average: 4
